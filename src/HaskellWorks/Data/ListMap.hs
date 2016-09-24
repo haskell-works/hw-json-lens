@@ -24,6 +24,9 @@ instance Functor ListMap where
 instance Foldable ListMap where
   foldMap f (ListMap as) = foldMap f (snd <$> as)
   {-# INLINE foldMap #-}
+  foldr f z (ListMap as) = foldr f z (snd <$> as)
+  {-# INLINE foldr #-}
+
 
 instance Traversable ListMap where
   traverse f = traverseWithKey (\_ v -> f v)
