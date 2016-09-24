@@ -1,13 +1,13 @@
-{-# LANGUAGE CPP #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE CPP                   #-}
+{-# LANGUAGE DefaultSignatures     #-}
+{-# LANGUAGE DeriveDataTypeable    #-}
+{-# LANGUAGE FlexibleContexts      #-}
+{-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE DefaultSignatures #-}
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE RankNTypes            #-}
+{-# LANGUAGE Trustworthy           #-}
+{-# LANGUAGE TupleSections         #-}
+{-# LANGUAGE TypeFamilies          #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 --------------------------------------------------------------------
@@ -21,15 +21,15 @@
 
 module HaskellWorks.Data.Json.Lens where
 
-import           GHC.Base
-import           HaskellWorks.Data.Json.PartialValue  as J
 import           Control.Applicative
 import           Control.Lens
-import           Data.Scientific (Scientific)
-import qualified Data.Scientific as Scientific
 import           Data.Data
-import           Prelude hiding (null)
-import           HaskellWorks.Data.ListMap (ListMap, fromList, toList)
+import           Data.Scientific                     (Scientific)
+import qualified Data.Scientific                     as Scientific
+import           GHC.Base
+import           HaskellWorks.Data.Json.PartialValue as J
+import           HaskellWorks.Data.ListMap           (ListMap, fromList, toList)
+import           Prelude                             hiding (null)
 
 ------------------------------------------------------------------------------
 -- Scientific prisms
@@ -76,7 +76,7 @@ class AsNumber t where
 instance AsNumber JsonPartialValue where
   _Number = prism (JsonPartialNumber . realToFrac) $ \v -> case v of
     JsonPartialNumber n -> Right (Scientific.fromFloatDigits n)
-    _ -> Left v
+    _                   -> Left v
   {-# INLINE _Number #-}
 
 instance AsNumber Scientific where
@@ -256,7 +256,7 @@ class AsPrimitive t => AsValue t where
   _Object :: Prism' t (ListMap JsonPartialValue)
   _Object = _Value.prism (JsonPartialObject . toList) (\v -> case v of
     JsonPartialObject o -> Right (fromList o)
-    _ -> Left v)
+    _                   -> Left v)
   {-# INLINE _Object #-}
 
   -- |
@@ -265,7 +265,7 @@ class AsPrimitive t => AsValue t where
   _Array :: Prism' t [JsonPartialValue]
   _Array = _Value.prism JsonPartialArray (\v -> case v of
     JsonPartialArray a -> Right a
-    _ -> Left v)
+    _                  -> Left v)
   {-# INLINE _Array #-}
 
 instance AsValue JsonPartialValue where

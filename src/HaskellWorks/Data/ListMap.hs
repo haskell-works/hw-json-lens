@@ -1,19 +1,19 @@
-{-# LANGUAGE CPP #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE CPP                   #-}
+{-# LANGUAGE FlexibleContexts      #-}
+{-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE RankNTypes            #-}
+{-# LANGUAGE Trustworthy           #-}
+{-# LANGUAGE TupleSections         #-}
+{-# LANGUAGE TypeFamilies          #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HaskellWorks.Data.ListMap where
 
 import           Control.Lens
 import           Data.Monoid
-import           Prelude hiding (null, lookup)
-import qualified Prelude as P
+import           Prelude      hiding (lookup, null)
+import qualified Prelude      as P
 
 newtype ListMap a = ListMap [(String, a)] deriving (Eq, Show)
 
@@ -94,7 +94,7 @@ toList (ListMap m) = m
 
 insert :: String -> a -> ListMap a -> ListMap a
 insert k v (ListMap m) = ListMap $ case break (\(k', _) -> k' == k) m of
-  (ps, _:xs) -> ps ++ ((k, v):xs)
+  (ps, _:xs) -> ps <> ((k, v):xs)
   _          -> (k, v) : m
 {-# INLINE insert #-}
 
