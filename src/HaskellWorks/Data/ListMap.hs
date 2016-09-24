@@ -17,10 +17,6 @@ import qualified Prelude as P
 
 newtype ListMap a = ListMap [(String, a)] deriving (Eq, Show)
 
--- instance Eq a => Eq (ListMap a) where
---   (ListMap a) == (ListMap b) = a == b
---   {-# INLINE (==) #-}
-
 instance Functor ListMap where
   fmap f = mapWithKey (\_ v -> f v)
   {-# INLINE fmap #-}
@@ -79,25 +75,32 @@ traverseWithKey f (ListMap as) = ListMap <$> traverse (\(k, v) -> (k,) <$> f k v
 
 empty :: ListMap a
 empty = ListMap []
+{-# INLINE empty #-}
 
 null :: ListMap a -> Bool
 null (ListMap xs) = P.null xs
+{-# INLINE null #-}
 
 fromList :: [(String, a)] -> ListMap a
 fromList = ListMap
+{-# INLINE fromList #-}
 
 toList :: ListMap a -> [(String, a)]
 toList (ListMap m) = m
+{-# INLINE toList #-}
 
 insert :: String -> a -> ListMap a -> ListMap a
 insert k v (ListMap m) = ListMap $ case break (\(k', _) -> k' == k) m of
   (ps, _:xs) -> ps ++ ((k, v):xs)
   _          -> (k, v) : m
+{-# INLINE insert #-}
 
 delete :: String -> ListMap a -> ListMap a
 delete k (ListMap m) = ListMap $ case break (\(k', _) -> k' == k) m of
   (ps, _:xs) -> ps <> xs
   _          -> m
+{-# INLINE delete #-}
 
 lookup :: String -> ListMap a -> Maybe a
 lookup k (ListMap m) = P.lookup k m
+{-# INLINE lookup #-}
