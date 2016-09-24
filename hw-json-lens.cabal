@@ -37,7 +37,7 @@ executable hw-json-lens-example
 
 library
   hs-source-dirs:       src
-  exposed-modules:      HaskellWorks.Data.Json.Lens
+  exposed-modules:      HaskellWorks.Data.Json.Lens, HaskellWorks.Data.ListMap
   build-depends:        base                          >= 4          && < 5
                       , array
                       , ansi-wl-pprint

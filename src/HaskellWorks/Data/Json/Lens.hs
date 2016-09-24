@@ -7,6 +7,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE DefaultSignatures #-}
+{-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 --------------------------------------------------------------------
@@ -26,16 +27,9 @@ import           Control.Applicative
 import           Control.Lens
 import           Data.Scientific (Scientific)
 import qualified Data.Scientific as Scientific
--- import qualified Data.ByteString as Strict
--- import           Data.ByteString.Lazy.Char8 as Lazy hiding (putStrLn)
 import           Data.Data
-import           Data.HashMap.Strict (HashMap, fromList, toList)
--- import           Data.Text as Text
--- import qualified Data.Text.Lazy as LazyText
--- import           Data.Text.Lens (packed)
--- import qualified Data.Text.Encoding as StrictText
--- import qualified Data.Text.Lazy.Encoding as LazyText
 import           Prelude hiding (null)
+import           HaskellWorks.Data.ListMap (ListMap, fromList, toList)
 
 ------------------------------------------------------------------------------
 -- Scientific prisms
@@ -259,7 +253,7 @@ class AsPrimitive t => AsValue t where
   --
   -- >>> _Object._Wrapped # [("key" :: String, _String # "value")] :: String
   -- "{\"key\":\"value\"}"
-  _Object :: Prism' t (HashMap String JsonPartialValue)
+  _Object :: Prism' t (ListMap JsonPartialValue)
   _Object = _Value.prism (JsonPartialObject . toList) (\v -> case v of
     JsonPartialObject o -> Right (fromList o)
     _ -> Left v)

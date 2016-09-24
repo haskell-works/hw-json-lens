@@ -4,7 +4,7 @@ module HaskellWorks.Data.Json.LensSpec (spec) where
 import           GHC.Base
 import           Control.Lens
 import qualified Data.ByteString as Strict
-import           Data.HashMap.Strict (fromList)
+import           HaskellWorks.Data.ListMap (fromList)
 import qualified Data.Vector.Storable                                       as DVS
 import           Data.Word
 import           Prelude hiding (null)
