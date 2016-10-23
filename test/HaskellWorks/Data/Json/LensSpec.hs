@@ -8,12 +8,12 @@ import           HaskellWorks.Data.ListMap (fromList)
 import qualified Data.Vector.Storable                                       as DVS
 import           Data.Word
 import           Prelude hiding (null)
+import           HaskellWorks.Data.BalancedParens.Simple
 import           HaskellWorks.Data.Bits.BitShown
 import           HaskellWorks.Data.Json.Succinct.Cursor
 import           HaskellWorks.Data.Json.Succinct.PartialIndex
 import           HaskellWorks.Data.Json.PartialValue
 import           HaskellWorks.Data.Json.Lens
-import           HaskellWorks.Data.Succinct.BalancedParens.Simple
 import           HaskellWorks.Data.FromByteString
 import           Test.Hspec
 

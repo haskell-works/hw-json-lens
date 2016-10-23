@@ -22,12 +22,13 @@ executable hw-json-lens-example
                       , conduit
                       , criterion
                       , errors
-                      , hw-bits
-                      , hw-conduit
-                      , hw-diagnostics
+                      , hw-balancedparens             >= 0.1.0.0
+                      , hw-bits                       >= 0.4.0.0
+                      , hw-conduit                    >= 0.1.0.0
+                      , hw-diagnostics                >= 0.0.0.6
                       , hw-json-lens
-                      , hw-prim                       >= 0.0.3.1
-                      , hw-rankselect                 >= 0.0.0.5
+                      , hw-prim                       >= 0.4.0.0
+                      , hw-rankselect                 >= 0.8.0.0
                       , lens >=3.8
                       , mmap
                       , resourcet
@@ -46,13 +47,14 @@ library
                       , conduit
                       , containers
                       , dlist
-                      , hw-bits
-                      , hw-conduit
-                      , hw-diagnostics
-                      , hw-json
+                      , hw-balancedparens             >= 0.1.0.0
+                      , hw-bits                       >= 0.4.0.0
+                      , hw-conduit                    >= 0.1.0.0
+                      , hw-diagnostics                >= 0.0.0.6
+                      , hw-json                       >= 0.4.0.0
                       , hw-parser
-                      , hw-prim                       >= 0.0.3.1
-                      , hw-rankselect                 >= 0.0.0.5
+                      , hw-prim                       >= 0.4.0.0
+                      , hw-rankselect                 >= 0.8.0.0
                       , lens >=3.8
                       , mmap
                       , mono-traversable
@@ -78,12 +80,13 @@ test-suite hw-json-lens-test
                       , containers
                       , conduit
                       , hspec
-                      , hw-bits
-                      , hw-conduit
-                      , hw-json
+                      , hw-balancedparens             >= 0.1.0.0
+                      , hw-bits                       >= 0.4.0.0
+                      , hw-conduit                    >= 0.1.0.0
+                      , hw-json                       >= 0.4.0.0
                       , hw-json-lens
-                      , hw-prim                       >= 0.0.3.1
-                      , hw-rankselect                 >= 0.0.0.5
+                      , hw-prim                       >= 0.4.0.0
+                      , hw-rankselect                 >= 0.8.0.0
                       , lens >=3.8
                       , mmap
                       , parsec
@@ -113,7 +116,7 @@ benchmark bench
                       , hw-bits
                       , hw-conduit
                       , hw-json-lens
-                      , hw-prim                       >= 0.0.3.1
+                      , hw-prim                       >= 0.4.0.0
                       , hw-rankselect                 >= 0.0.0.5
                       , lens >=3.8
                       , mmap
