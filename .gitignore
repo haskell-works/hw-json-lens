@@ -17,7 +17,6 @@ cabal.sandbox.config
 
 /*.submodules
 /.stack-work/
-/*.nix
-/*.nix.part
 /result
-corpus/
+/deps
+/stack.yaml
