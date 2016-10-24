@@ -21,3 +21,5 @@ cabal.sandbox.config
 /*.nix.part
 /result
 corpus/
+
+/deps
