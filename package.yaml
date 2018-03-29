@@ -1,0 +1,77 @@
+name: hw-json-lens
+version: '0.0.0.1'
+synopsis: Lens for hw-json
+description: Please see README.md
+category: Data
+author: Alexey Raga
+maintainer: alexey.raga@gmail.com
+copyright: 2016 Alexey Raga
+license: MIT
+github: haskell-works/hw-json-lens
+homepage: http://github.com/haskell-works/hw-json-lens#readme
+extra-source-files:
+- README.md
+ghc-options: -Wall
+dependencies:
+- base >=4 && <5
+- bytestring
+- conduit
+- hw-bits >=0.4.0.0
+- hw-conduit >=0.1.0.0
+- hw-prim >=0.4.0.0
+- hw-rankselect >=0.8.0.0
+- lens >=3.8
+- mmap
+- resourcet
+- scientific
+- unordered-containers
+- vector
+library:
+  source-dirs: src
+  ghc-options:
+  - -O2
+  - -msse4.2
+  exposed-modules:
+  - HaskellWorks.Data.Json.Lens
+  - HaskellWorks.Data.ListMap
+  dependencies:
+  - array
+  - ansi-wl-pprint
+  - attoparsec
+  - containers
+  - dlist
+  - hw-balancedparens >=0.1.0.0
+  - hw-diagnostics >=0.0.0.5
+  - hw-json >=0.4.0.0
+  - hw-parser
+  - mono-traversable
+  - text
+  - word8
+tests:
+  hw-json-lens-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - attoparsec
+    - containers
+    - hspec
+    - hw-balancedparens >=0.1.0.0
+    - hw-json >=0.4.0.0
+    - hw-json-lens
+    - parsec
+    - QuickCheck
+    - transformers
+benchmarks:
+  bench:
+    main: Main.hs
+    source-dirs: bench
+    ghc-options:
+    - -O2
+    - -msse4.2
+    dependencies:
+    - criterion
+    - hw-json-lens
