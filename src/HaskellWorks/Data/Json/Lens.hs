@@ -8,6 +8,7 @@
 {-# LANGUAGE Trustworthy           #-}
 {-# LANGUAGE TupleSections         #-}
 {-# LANGUAGE TypeFamilies          #-}
+
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 --------------------------------------------------------------------
@@ -21,15 +22,16 @@
 
 module HaskellWorks.Data.Json.Lens where
 
-import           Control.Applicative
-import           Control.Lens
-import           Data.Data
-import           Data.Scientific                     (Scientific)
-import qualified Data.Scientific                     as Scientific
-import           GHC.Base
-import           HaskellWorks.Data.Json.PartialValue as J
-import           HaskellWorks.Data.ListMap           (ListMap, fromList, toList)
-import           Prelude                             hiding (null)
+import Control.Applicative
+import Control.Lens
+import Data.Data
+import Data.Scientific                     (Scientific)
+import GHC.Base
+import HaskellWorks.Data.Json.PartialValue as J
+import HaskellWorks.Data.ListMap           (ListMap, fromList, toList)
+import Prelude                             hiding (null)
+
+import qualified Data.Scientific as Scientific
 
 ------------------------------------------------------------------------------
 -- Scientific prisms
@@ -195,7 +197,7 @@ instance AsPrimitive JsonPartialValue where
       toPrim (JsonPartialNumber n) = Right $ NumberPrim (Scientific.fromFloatDigits n)
       toPrim (JsonPartialBool b)   = Right $ BoolPrim b
       toPrim JsonPartialNull       = Right NullPrim
-      toPrim v          = Left v
+      toPrim v                     = Left v
       {-# INLINE toPrim #-}
       fromPrim (StringPrim s) = JsonPartialString s
       fromPrim (NumberPrim n) = JsonPartialNumber (realToFrac n)
@@ -428,11 +430,11 @@ type instance Index JsonPartialValue = String
 type instance IxValue JsonPartialValue = JsonPartialValue
 instance Ixed JsonPartialValue where
   ix i f (JsonPartialObject o) = (JsonPartialObject . toList) <$> ix i f (fromList o)
-  ix _ _ v          = pure v
+  ix _ _ v                     = pure v
   {-# INLINE ix #-}
 
 instance Plated JsonPartialValue where
   plate f (JsonPartialObject o) = (JsonPartialObject . toList) <$> traverse f (fromList o)
-  plate f (JsonPartialArray a) = JsonPartialArray <$> traverse f a
-  plate _ xs = pure xs
+  plate f (JsonPartialArray a)  = JsonPartialArray <$> traverse f a
+  plate _ xs                    = pure xs
   {-# INLINE plate #-}

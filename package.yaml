@@ -16,19 +16,10 @@ extra-source-files:
 ghc-options: -Wall
 
 dependencies:
-- base >=4 && <5
-- bytestring
-- conduit
-- hw-bits >=0.4.0.0
-- hw-conduit >=0.1.0.0
-- hw-prim >=0.4.0.0
-- hw-rankselect >=0.8.0.0
-- lens >=3.8
-- mmap
-- resourcet
-- scientific
-- unordered-containers
-- vector
+- base                  >= 4          && < 5
+- bytestring            >= 0.10       && < 0.11
+- hw-json               >= 0.8.1      && < 0.9
+- lens                  >= 4          && < 5
 
 library:
   source-dirs: src
@@ -39,20 +30,11 @@ library:
   - HaskellWorks.Data.Json.Lens
   - HaskellWorks.Data.ListMap
   dependencies:
-  - array
-  - ansi-wl-pprint
-  - attoparsec
   - containers
-  - dlist
-  - hw-balancedparens >= 0.1.0.0
-  - hw-diagnostics    >= 0.0.0.5
-  - hw-json           >= 0.8.1      && < 0.9
-  - hw-parser
-  - mono-traversable
-  - text
+  - scientific
   - word8
 
-tests:
+  tests:
   hw-json-lens-test:
     main: Spec.hs
     source-dirs: test
@@ -61,15 +43,12 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - attoparsec
-    - containers
-    - hspec
-    - hw-balancedparens   >= 0.1.0.0
-    - hw-json             >= 0.8.1      && < 0.9
+    - hspec                 >= 2.5        && < 2.6
+    - hw-bits               >= 0.7        && < 0.8
+    - hw-balancedparens     >= 0.2        && < 0.3
     - hw-json-lens
-    - parsec
-    - QuickCheck
-    - transformers
+    - hw-prim               >= 0.6.2.0    && < 0.7
+    - vector                >= 0.12       && < 0.13
 
 benchmarks:
   bench:
@@ -79,5 +58,5 @@ benchmarks:
     - -O2
     - -msse4.2
     dependencies:
-    - criterion
+    - criterion             >= 1.4        && < 1.5
     - hw-json-lens
