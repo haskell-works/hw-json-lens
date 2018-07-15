@@ -1,21 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HaskellWorks.Data.Json.LensSpec (spec) where
 
-import           GHC.Base
 import           Control.Lens
-import qualified Data.ByteString as Strict
-import           HaskellWorks.Data.ListMap (fromList)
-import qualified Data.Vector.Storable                                       as DVS
 import           Data.Word
-import           Prelude hiding (null)
+import           GHC.Base
 import           HaskellWorks.Data.BalancedParens.Simple
 import           HaskellWorks.Data.Bits.BitShown
-import           HaskellWorks.Data.Json.Succinct.Cursor
-import           HaskellWorks.Data.Json.Succinct.PartialIndex
-import           HaskellWorks.Data.Json.PartialValue
-import           HaskellWorks.Data.Json.Lens
 import           HaskellWorks.Data.FromByteString
+import           HaskellWorks.Data.Json.Cursor
+import           HaskellWorks.Data.Json.Lens
+import           HaskellWorks.Data.Json.PartialValue
+import           HaskellWorks.Data.Json.Succinct.PartialIndex
+import           HaskellWorks.Data.ListMap                    (fromList)
+import           Prelude                                      hiding (null)
 import           Test.Hspec
+
+import qualified Data.ByteString                              as Strict
+import qualified Data.Vector.Storable                         as DVS
 
 {-# ANN module ("HLint: ignore Redundant do"        :: String) #-}
 {-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}

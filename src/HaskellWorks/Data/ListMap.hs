@@ -3,17 +3,17 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE RankNTypes            #-}
-{-# LANGUAGE Trustworthy           #-}
 {-# LANGUAGE TupleSections         #-}
 {-# LANGUAGE TypeFamilies          #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HaskellWorks.Data.ListMap where
 
-import           Control.Lens
-import           Data.Monoid
-import           Prelude      hiding (lookup, null)
-import qualified Prelude      as P
+import Control.Lens
+import Data.Monoid
+import Prelude      hiding (lookup, null)
+
+import qualified Prelude as P
 
 newtype ListMap a = ListMap [(String, a)] deriving (Eq, Show)
 
