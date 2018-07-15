@@ -1,5 +1,5 @@
 name: hw-json-lens
-version: '0.0.0.1'
+version: '0.1.0.0'
 synopsis: Lens for hw-json
 description: Please see README.md
 category: Data
