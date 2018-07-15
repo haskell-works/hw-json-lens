@@ -9,9 +9,12 @@ copyright: 2016 Alexey Raga
 license: MIT
 github: haskell-works/hw-json-lens
 homepage: http://github.com/haskell-works/hw-json-lens#readme
+
 extra-source-files:
 - README.md
+
 ghc-options: -Wall
+
 dependencies:
 - base >=4 && <5
 - bytestring
@@ -26,6 +29,7 @@ dependencies:
 - scientific
 - unordered-containers
 - vector
+
 library:
   source-dirs: src
   ghc-options:
@@ -40,13 +44,14 @@ library:
   - attoparsec
   - containers
   - dlist
-  - hw-balancedparens >=0.1.0.0
-  - hw-diagnostics >=0.0.0.5
-  - hw-json >=0.4.0.0
+  - hw-balancedparens >= 0.1.0.0
+  - hw-diagnostics    >= 0.0.0.5
+  - hw-json           >= 0.8.1      && < 0.9
   - hw-parser
   - mono-traversable
   - text
   - word8
+
 tests:
   hw-json-lens-test:
     main: Spec.hs
@@ -59,12 +64,13 @@ tests:
     - attoparsec
     - containers
     - hspec
-    - hw-balancedparens >=0.1.0.0
-    - hw-json >=0.4.0.0
+    - hw-balancedparens   >= 0.1.0.0
+    - hw-json             >= 0.8.1      && < 0.9
     - hw-json-lens
     - parsec
     - QuickCheck
     - transformers
+
 benchmarks:
   bench:
     main: Main.hs
