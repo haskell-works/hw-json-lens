@@ -2,7 +2,7 @@ name: hw-json-lens
 version: '0.1.0.0'
 synopsis: Lens for hw-json
 description: Please see README.md
-category: Data
+category: Data, Succinct Data Structures, Data Structures, JSON
 author: Alexey Raga, John Ky
 maintainer: alexey.raga@gmail.com, newhoggy@gmail.com
 copyright: 2016 Alexey Raga, 2018 John Ky
