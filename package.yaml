@@ -58,5 +58,5 @@ benchmarks:
     - -O2
     - -msse4.2
     dependencies:
-    - criterion             >= 1.4        && < 1.5
+    - criterion             >= 1.4        && < 1.6
     - hw-json-lens
