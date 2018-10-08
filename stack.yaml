@@ -8,5 +8,5 @@ flags: {}
 extra-package-dbs: []
 
 extra-deps:
-  - hw-json-0.8.1.0
+  - hw-json-0.9.0.0
   - hw-parser-0.1.0.0
