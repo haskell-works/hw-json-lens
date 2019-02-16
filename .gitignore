@@ -14,7 +14,6 @@ cabal.sandbox.config
 *.prof
 *.aux
 *.hp
-*.cabal
 
 /*.submodules
 /.stack-work/
@@ -25,3 +24,4 @@ cabal.sandbox.config
 /*.json.bp
 /snapshot.yaml
 /stack-ci.yaml
+/.ghc.environment.*
