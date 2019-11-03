@@ -4,6 +4,7 @@
 {-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RankNTypes            #-}
 {-# LANGUAGE Trustworthy           #-}
 {-# LANGUAGE TupleSections         #-}
@@ -26,6 +27,7 @@ import Control.Applicative
 import Control.Lens
 import Data.Data
 import Data.Scientific                     (Scientific)
+import Data.Text                           (Text)
 import GHC.Base
 import HaskellWorks.Data.Json.PartialValue as J
 import HaskellWorks.Data.ListMap           (ListMap, fromList, toList)
@@ -114,7 +116,7 @@ _Integral = _Number . iso floor fromIntegral
 
 -- | Primitives of 'Value'
 data Primitive
-  = StringPrim !String
+  = StringPrim !Text
   | NumberPrim !Scientific
   | BoolPrim !Bool
   | NullPrim
