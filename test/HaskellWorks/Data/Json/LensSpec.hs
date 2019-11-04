@@ -11,14 +11,14 @@ import HaskellWorks.Data.ListMap                    (fromList)
 import Prelude                                      hiding (null)
 import Test.Hspec
 
-import qualified Data.ByteString                              as BS
-import qualified HaskellWorks.Data.Json.Backend.Standard.Slow as SLOW
+import qualified Data.ByteString                             as BS
+import qualified HaskellWorks.Data.Json.Standard.Cursor.Fast as JCF
 
 {-# ANN module ("HLint: ignore Redundant do"        :: String) #-}
 {-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
 
 j :: BS.ByteString -> JsonPartialValue
-j bs = jsonPartialJsonValueAt (jsonPartialIndexAt (SLOW.makeCursor bs))
+j bs = jsonPartialJsonValueAt (jsonPartialIndexAt (JCF.fromByteStringViaBlanking bs))
 
 spec :: Spec
 spec = describe "Nth Spec" $ do

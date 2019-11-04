@@ -23,6 +23,7 @@
 module HaskellWorks.Data.Json.Lens where
 
 import Control.Applicative
+import Control.Arrow                       (first)
 import Control.Lens
 import Data.Data
 import Data.Scientific                     (Scientific)
@@ -32,6 +33,7 @@ import HaskellWorks.Data.ListMap           (ListMap, fromList, toList)
 import Prelude                             hiding (null)
 
 import qualified Data.Scientific as Scientific
+import qualified Data.Text       as T
 
 ------------------------------------------------------------------------------
 -- Scientific prisms
@@ -192,20 +194,19 @@ class AsNumber t => AsPrimitive t where
 
 instance AsPrimitive JsonPartialValue where
   _Primitive = prism fromPrim toPrim
-    where
-      toPrim (JsonPartialString s) = Right $ StringPrim s
-      toPrim (JsonPartialNumber n) = Right $ NumberPrim (Scientific.fromFloatDigits n)
-      toPrim (JsonPartialBool b)   = Right $ BoolPrim b
-      toPrim JsonPartialNull       = Right NullPrim
-      toPrim v                     = Left v
-      {-# INLINE toPrim #-}
-      fromPrim (StringPrim s) = JsonPartialString s
-      fromPrim (NumberPrim n) = JsonPartialNumber (realToFrac n)
-      fromPrim (BoolPrim b)   = JsonPartialBool b
-      fromPrim NullPrim       = JsonPartialNull
-      {-# INLINE fromPrim #-}
+    where toPrim (JsonPartialString s) = Right $ StringPrim (T.unpack s)
+          toPrim (JsonPartialNumber n) = Right $ NumberPrim (Scientific.fromFloatDigits n)
+          toPrim (JsonPartialBool b)   = Right $ BoolPrim b
+          toPrim JsonPartialNull       = Right NullPrim
+          toPrim v                     = Left v
+          {-# INLINE toPrim #-}
+          fromPrim (StringPrim s) = JsonPartialString (T.pack s)
+          fromPrim (NumberPrim n) = JsonPartialNumber (realToFrac n)
+          fromPrim (BoolPrim b)   = JsonPartialBool b
+          fromPrim NullPrim       = JsonPartialNull
+          {-# INLINE fromPrim #-}
   {-# INLINE _Primitive #-}
-  _String = prism JsonPartialString $ \v -> case v of JsonPartialString s -> Right s; _ -> Left v
+  _String = prism (JsonPartialString . T.pack) $ \v -> case v of JsonPartialString s -> Right (T.unpack s); _ -> Left v
   {-# INLINE _String #-}
   _Bool = prism JsonPartialBool (\v -> case v of JsonPartialBool b -> Right b; _ -> Left v)
   {-# INLINE _Bool #-}
@@ -256,8 +257,8 @@ class AsPrimitive t => AsValue t where
   -- >>> _Object._Wrapped # [("key" :: String, _String # "value")] :: String
   -- "{\"key\":\"value\"}"
   _Object :: Prism' t (ListMap JsonPartialValue)
-  _Object = _Value.prism (JsonPartialObject . toList) (\v -> case v of
-    JsonPartialObject o -> Right (fromList o)
+  _Object = _Value.prism (JsonPartialObject . fmap (first T.pack) . toList) (\v -> case v of
+    JsonPartialObject o -> Right (fromList (fmap (first T.unpack) o))
     _                   -> Left v)
   {-# INLINE _Object #-}
 
@@ -429,12 +430,12 @@ type instance Index JsonPartialValue = String
 
 type instance IxValue JsonPartialValue = JsonPartialValue
 instance Ixed JsonPartialValue where
-  ix i f (JsonPartialObject o) = (JsonPartialObject . toList) <$> ix i f (fromList o)
+  ix i f (JsonPartialObject o) = (JsonPartialObject . fmap (first T.pack) . toList) <$> ix i f (fromList (fmap (first T.unpack) o))
   ix _ _ v                     = pure v
   {-# INLINE ix #-}
 
 instance Plated JsonPartialValue where
-  plate f (JsonPartialObject o) = (JsonPartialObject . toList) <$> traverse f (fromList o)
+  plate f (JsonPartialObject o) = (JsonPartialObject . fmap (first T.pack) .  toList) <$> traverse f (fromList (fmap (first T.unpack) o))
   plate f (JsonPartialArray a)  = JsonPartialArray <$> traverse f a
   plate _ xs                    = pure xs
   {-# INLINE plate #-}
