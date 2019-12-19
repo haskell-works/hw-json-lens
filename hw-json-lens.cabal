@@ -9,8 +9,11 @@ homepage:               http://github.com/haskell-works/hw-json-lens#readme
 bug-reports:            https://github.com/haskell-works/hw-json-lens/issues
 author:                 Alexey Raga, John Ky
 maintainer:             alexey.raga@gmail.com, newhoggy@gmail.com
-copyright:              2016 Alexey Raga, 2018-2019 John Ky
-license:                MIT
+copyright:              2018-2019 John Ky
+                      , 2016 Alexey Raga
+                      , 2013-2014 Edward Kmett,
+                      , 2012 Paul Wilson
+license:                BSD-3-Clause
 license-file:           LICENSE
 build-type:             Simple
 extra-source-files:     README.md
@@ -21,9 +24,12 @@ source-repository head
 
 common base                     { build-depends: base                     >= 4          && < 5      }
 
+common aeson                    { build-depends: aeson                                              }
 common bytestring               { build-depends: bytestring               >= 0.10       && < 0.11   }
 common containers               { build-depends: containers               >= 0.5        && < 0.7    }
 common criterion                { build-depends: criterion                >= 1.4        && < 1.6    }
+common doctest                  { build-depends: doctest                  >= 0.16.2     && < 0.17   }
+common doctest-discover         { build-depends: doctest-discover         >= 0.2        && < 0.3    }
 common hedgehog                 { build-depends: hedgehog                 >= 0.5        && < 1.1    }
 common hspec                    { build-depends: hspec                    >= 2.4        && < 3      }
 common hw-balancedparens        { build-depends: hw-balancedparens        >= 0.2.0.1    && < 0.4    }
@@ -47,6 +53,7 @@ common config
 
 library
   import:               base, config
+                      , aeson
                       , bytestring
                       , containers
                       , hw-json
@@ -96,3 +103,15 @@ test-suite hw-json-lens-test
   hs-source-dirs:       test
   ghc-options:          -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:   hspec-discover:hspec-discover
+
+test-suite hw-json-lens-doctest
+  import:               base, config
+                      , doctest
+                      , doctest-discover
+                      , hw-json-lens
+  default-language:     Haskell2010
+  type:                 exitcode-stdio-1.0
+  ghc-options:          -threaded
+  main-is:              DoctestDriver.hs
+  HS-Source-Dirs:       doctest
+  build-tool-depends:   doctest-discover:doctest-discover
