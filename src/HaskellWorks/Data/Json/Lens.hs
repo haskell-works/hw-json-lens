@@ -11,15 +11,6 @@
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
---------------------------------------------------------------------
--- |
--- Copyright :  (c) Alexey Raga 2016, (c) Edward Kmett 2013-2014, (c) Paul Wilson 2012
--- License   :  BSD3
--- Maintainer:  Alexey Raga <alexey.raga@gmail.com>
--- Stability :  experimental
--- Portability: non-portable
---------------------------------------------------------------------
-
 module HaskellWorks.Data.Json.Lens where
 
 import Control.Applicative

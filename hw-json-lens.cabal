@@ -9,8 +9,11 @@ homepage:               http://github.com/haskell-works/hw-json-lens#readme
 bug-reports:            https://github.com/haskell-works/hw-json-lens/issues
 author:                 Alexey Raga, John Ky
 maintainer:             alexey.raga@gmail.com, newhoggy@gmail.com
-copyright:              2016 Alexey Raga, 2018-2019 John Ky
-license:                MIT
+copyright:              2018-2019 John Ky
+                      , 2016 Alexey Raga
+                      , 2013-2014 Edward Kmett,
+                      , 2012 Paul Wilson
+license:                BSD-3-Clause
 license-file:           LICENSE
 build-type:             Simple
 extra-source-files:     README.md
