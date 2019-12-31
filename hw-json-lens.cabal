@@ -77,7 +77,6 @@ benchmark bench
                       , lens
   type:                 exitcode-stdio-1.0
   main-is:              Main.hs
-  other-modules:        Paths_hw_json_lens
   hs-source-dirs:       bench
   ghc-options:          -O2 -msse4.2
 
@@ -97,8 +96,7 @@ test-suite hw-json-lens-test
                       , vector
   type:                 exitcode-stdio-1.0
   main-is:              Spec.hs
-  other-modules:        Paths_hw_json_lens
-                        HaskellWorks.Data.Json.LensSpec
+  other-modules:        HaskellWorks.Data.Json.LensSpec
                         HaskellWorks.Data.Json.NthSpec
   hs-source-dirs:       test
   ghc-options:          -threaded -rtsopts -with-rtsopts=-N
