@@ -10,7 +10,6 @@
 module HaskellWorks.Data.ListMap where
 
 import Control.Lens
-import Data.Monoid
 import Prelude      hiding (lookup, null)
 
 import qualified Prelude as P
