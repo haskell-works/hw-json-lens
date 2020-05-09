@@ -13,8 +13,8 @@ import Test.Hspec
 import qualified Data.ByteString                             as Strict
 import qualified HaskellWorks.Data.Json.Standard.Cursor.Fast as JCF
 
-{-# ANN module ("HLint: ignore Redundant do"        :: String) #-}
-{-# ANN module ("HLint: ignore Reduce duplication"  :: String) #-}
+{- HLINT ignore "Redundant do"        -}
+{- HLINT ignore "Reduce duplication"  -}
 
 j :: Strict.ByteString -> JsonPartialValue
 j = jsonPartialJsonValueAt . jsonPartialIndexAt . JCF.fromByteStringViaBlanking
