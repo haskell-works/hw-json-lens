@@ -6,7 +6,6 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE RankNTypes            #-}
 {-# LANGUAGE Trustworthy           #-}
-{-# LANGUAGE TupleSections         #-}
 {-# LANGUAGE TypeFamilies          #-}
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
@@ -198,12 +197,12 @@ type instance Index JsonPartialValue = String
 
 type instance IxValue JsonPartialValue = JsonPartialValue
 instance Ixed JsonPartialValue where
-  ix i f (JsonPartialObject o) = (JsonPartialObject . fmap (first T.pack) . toList) <$> ix i f (fromList (fmap (first T.unpack) o))
+  ix i f (JsonPartialObject o) = JsonPartialObject . fmap (first T.pack) . toList <$> ix i f (fromList (fmap (first T.unpack) o))
   ix _ _ v                     = pure v
   {-# INLINE ix #-}
 
 instance Plated JsonPartialValue where
-  plate f (JsonPartialObject o) = (JsonPartialObject . fmap (first T.pack) .  toList) <$> traverse f (fromList (fmap (first T.unpack) o))
+  plate f (JsonPartialObject o) = JsonPartialObject . fmap (first T.pack) . toList <$> traverse f (fromList (fmap (first T.unpack) o))
   plate f (JsonPartialArray a)  = JsonPartialArray <$> traverse f a
   plate _ xs                    = pure xs
   {-# INLINE plate #-}

@@ -1,6 +1,7 @@
 {-# LANGUAGE CPP                   #-}
 {-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE LambdaCase            #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE RankNTypes            #-}
 {-# LANGUAGE TupleSections         #-}
@@ -42,7 +43,7 @@ instance Ixed (ListMap a) where
   {-# INLINE ix #-}
 
 instance At (ListMap a) where
-  at k f m = f mv <&> \r -> case r of
+  at k f m = f mv <&> \case
     Nothing -> maybe m (const (delete k m)) mv
     Just v' -> insert k v' m
     where mv = lookup k m
